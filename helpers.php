@@ -6,7 +6,7 @@ if (!function_exists('vite_asset')) {
         static $manifest = null;
 
         if (app()->isLocal()) {
-            return "/build/{$path}";
+            return "build/{$path}";
         }
 
         if ($manifest === null) {
@@ -14,6 +14,7 @@ if (!function_exists('vite_asset')) {
             $manifest = file_exists($manifestPath) ? json_decode(file_get_contents($manifestPath), true) : [];
         }
 
-        return array_key_exists($path, $manifest) ? "/build/{$manifest[$path]['file']}" : $path;
+        $key = "assets/{$path}";
+        return array_key_exists($key, $manifest) ? "/build/{$manifest[$key]['file']}" : $path;
     }
 }

@@ -9,6 +9,9 @@ export default defineConfig({
             input: 'resources/js/app.js'
         }
     },
+    css: {
+        postcss: 'postcss.config.js'
+    },
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],

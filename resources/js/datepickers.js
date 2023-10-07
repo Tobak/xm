@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    $("#start_date").datepicker({
+        showOn: "both",
+        buttonText: "<i class='fa fa-calendar'></i>"
+    });
+
+    $("#end_date").datepicker({
+        showOn: "both",
+        buttonText: "<i class='fa fa-calendar'></i>"
+    });
+
     $("input[name='start_date']").datepicker({
         dateFormat: "yy-mm-dd",
         maxDate: new Date(),
