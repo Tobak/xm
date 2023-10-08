@@ -27,7 +27,7 @@
         <tbody>
         @foreach($prices as $price)
             <tr>
-                <td>{{ date('Y-m-d H:i:s',$price->getDate()) }}</td>
+                <td>{{ date('Y-m-d',$price->getDate()) }}</td>
                 <td>{{ $price->getOpen() }}</td>
                 <td>{{ $price->getHigh() }}</td>
                 <td>{{ $price->getLow() }}</td>
