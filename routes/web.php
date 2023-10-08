@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 
@@ -21,3 +22,5 @@ use App\Http\Controllers\CompanyController;
 Route::get('/', [CompanyController::class, 'showForm'])->name('form.show');
 Route::get('/form', [CompanyController::class, 'showForm'])->name('form.show');
 Route::post('/form', [CompanyController::class, 'processForm'])->name('form.process');
+Route::get('/chart/{symbol}/{startDate}/{endDate}', [ChartController::class, 'getHistoricalValues'])->name('chart.index');
+

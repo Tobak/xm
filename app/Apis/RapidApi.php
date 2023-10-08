@@ -3,7 +3,7 @@
 namespace App\Apis;
 
 use App\Dto\Price;
-use  App\Interfaces\DataProviderInterface;
+use App\Interfaces\DataProviderInterface;
 use Exception;
 use Illuminate\Support\Facades\Http;
 
@@ -26,7 +26,7 @@ class RapidApi implements DataProviderInterface
             try{
                 $data = $this->performRequest($symbol);
             } catch (Exception $e) {
-                if($try === self::MAX_TRIES){
+                if($try >= self::MAX_TRIES){
                     throw $e;
                 }
                 sleep(self::DELAY);
@@ -44,12 +44,11 @@ class RapidApi implements DataProviderInterface
     {
         return (new Price())
             ->setDate($datum['date'])
-            ->setOpen($datum['open'])
-            ->setClose($datum['close'])
-            ->setHigh($datum['high'])
-            ->setLow($datum['low'])
-            ->setVolume($datum['volume'])
-            ->setAdjclose($datum['adjclose']);
+            ->setOpen( array_key_exists('open',$datum) ?$datum['open']: null)
+            ->setClose(array_key_exists('close',$datum) ?$datum['close']: null)
+            ->setHigh(array_key_exists('high',$datum) ?$datum['high']: null)
+            ->setLow(array_key_exists('low',$datum) ?$datum['low']: null)
+            ->setVolume(array_key_exists('volume',$datum) ?$datum['volume']: null);
     }
 
     /**
