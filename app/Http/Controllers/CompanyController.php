@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Http;
 
 class CompanyController extends Controller
 {
+    const CACHE_KEY = 'COMPANY_DATA';
+    const CACHE_MINUTES = 120;
+
     public function showForm()
     {
         $data = $this->getCompanySymbols();
@@ -45,7 +48,11 @@ class CompanyController extends Controller
 
     private function getCompanySymbols()
     {
-        // Ideally, cache this for performance
-        return Http::get('https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_json/data/a5bc7580d6176d60ac0b2142ca8d7df6/nasdaq-listed_json.json')->json();
+        $data = cache(self::CACHE_KEY);
+        if(!$data) {
+            $data = Http::get('https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_json/data/a5bc7580d6176d60ac0b2142ca8d7df6/nasdaq-listed_json.json')->json();
+            cache([self::CACHE_KEY => $data], self::CACHE_MINUTES);
+        }
+        return $data;
     }
 }
