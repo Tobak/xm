@@ -3,9 +3,14 @@
 <head>
     <title>Historical Values</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.1.2"></script>
+
 </head>
 <body style="background-color: beige;">
-<a href="{{ url('/') }}" class="btn btn-primary"  style="background-color: beige; color:black;">Go to Home</a>
+
+<a href="{{ url('/') }}" class="btn btn-primary"  style="background-color: beige; color:black; top: 0;">Go to Home</a>
+<canvas id="priceChart" width="400" height="200"></canvas>
 <div class="container mt-5">
     <h2>Historical Values for {{ request()->symbol }}</h2>
     <table class="table table-bordered">
@@ -34,5 +39,32 @@
     </table>
 </div>
 
+<script>
+    // Convert PHP data to JavaScript
+    var data = @json($chartData);
+
+    // Extract dates, open prices, and close prices
+    var dates = data.map(d => d.date);
+    var openPrices = data.map(d => d.open);
+    var closePrices = data.map(d => d.close);
+
+    const ctx = document.querySelector("#priceChart").getContext("2d");
+    const chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: "Open",
+                    data: openPrices,
+                },
+                {
+                    label: "Close",
+                    data: closePrices,
+                },
+            ],
+        },
+    });
+</script>
 </body>
 </html>
