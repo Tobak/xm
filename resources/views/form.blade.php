@@ -20,7 +20,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery UI -->
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <link href="{{ vite_asset('assets/app.css') }}" rel="stylesheet">
+    <link href="{{ vite_asset('js/app.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -66,7 +66,7 @@
         </div>
     @endif
 <!-- Vite JS -->
-<script type="module" src="{{ vite_asset('assets/app.js') }}"></script>
+<script type="module" src="{{ vite_asset('js/app.js') }}"></script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Services;
+namespace Tests\Unit;
 
 use App\Dto\Price;
 use App\Services\DataService;
