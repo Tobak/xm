@@ -78,15 +78,4 @@ class Price
         return $this;
     }
 
-    public function getAdjclose(): ?float
-    {
-        return $this->adjclose;
-    }
-
-    public function setAdjclose(?float $adjclose): Price
-    {
-        $this->adjclose = $adjclose;
-        return $this;
-    }
-
 }

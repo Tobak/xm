@@ -10,10 +10,15 @@ use DateTime;
 
 class ChartController extends Controller
 {
-    protected function getHistoricalValues(string $symbol, string $startDate,string $endDate)
+    protected $dataService;
+
+    public function __construct(DataService $dataService)
     {
-        $dataService = new DataService(new RapidApi());
-        $prices = $dataService->fetchPrices($symbol, new DateTime($startDate), new DateTime($endDate));
+        $this->dataService = $dataService;
+    }
+    public function getHistoricalValues(string $symbol, string $startDate,string $endDate)
+    {
+        $prices = $this->dataService->fetchPrices($symbol, new DateTime($startDate), new DateTime($endDate));
 
         $chartData = array_map(fn($x)=>$this->mapData($x),$prices);
         return view('chart', [
